@@ -80,15 +80,16 @@ function displayStoreInfo(store) {
       // Start by creating new <li> and append to each store's unique ul
       let liElement = document.createElement('li');
       document.getElementById(`${divId}-ul`).append(liElement);
+      let cookies = `${Math.ceil(store.generateCustomers() * store.avgCookies)} cookies`;
 
       // Change <li> element inner HTML based on time of day
       if (j < 12) {
-        liElement.innerHTML = `${j}am: ${Math.ceil(store.generateCustomers() * store.avgCookies)} cookies`;
+        liElement.innerHTML = `${j}am: ${cookies}`;
       } else if (j === 12) {
-        liElement.innerHTML = `${j}pm: ${Math.ceil(store.generateCustomers() * store.avgCookies)} cookies`;
+        liElement.innerHTML = `${j}pm: ${cookies}`;
       } else {
         // When time of day is 13 hours, reset to 1pm
-        liElement.innerHTML = `${newHour}pm: ${Math.ceil(store.generateCustomers() * store.avgCookies)} cookies`;
+        liElement.innerHTML = `${newHour}pm: ${cookies}`;
         newHour++;
       }
     }
