@@ -3,6 +3,7 @@
 console.log('the js is linked');
 
 const $1standPike = {
+  name: '1st and Pike',
   minCustomers: 23,
   maxCustomers: 65,
   avgCookies: 6.3,
@@ -10,6 +11,7 @@ const $1standPike = {
 };
 
 const seaTacAirport = {
+  name: 'SeaTac Airport',
   minCustomers: 3,
   maxCustomers: 24,
   avgCookies: 1.2,
@@ -17,6 +19,7 @@ const seaTacAirport = {
 };
 
 const seattleCenter = {
+  name: 'SeattleCenter',
   minCustomers: 11,
   maxCustomers: 38,
   avgCookies: 3.7,
@@ -24,6 +27,7 @@ const seattleCenter = {
 };
 
 const capitolHill = {
+  name: 'Capitol Hill',
   minCustomers: 20,
   maxCustomers: 38,
   avgCookies: 2.3,
@@ -31,6 +35,7 @@ const capitolHill = {
 };
 
 const alki = {
+  name: 'Alki',
   minCustomers: 2,
   maxCustomers: 16,
   avgCookies: 4.6,
@@ -43,3 +48,17 @@ function generateRandomCustomers() {
 
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function displayStoreInfo(store) {
+  let storeName = store.
+  function createLists(storeName) {
+    let newDiv = document.createElement('div');
+    let newHeading = document.createElement('h2');
+    let newUl = document.createElement('ul');
+  
+    newHeading.innerHTML(`${storeName}`);
+  }
+}
+
+displayStoreInfo($1standPike)
+
