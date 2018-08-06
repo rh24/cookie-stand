@@ -2,7 +2,7 @@
 
 console.log('the js is linked');
 
-const $$1stAndPike = {
+const $1stAndPike = {
   name: '1st and Pike',
   minCustomers: 23,
   maxCustomers: 65,
@@ -65,6 +65,6 @@ function displayStoreInfo(store) {
   return createLists(storeName);
 }
 
-console.log(displayStoreInfo($$1stAndPike));
-displayStoreInfo($$1stAndPike);
+console.log(displayStoreInfo($1stAndPike));
+displayStoreInfo($1stAndPike);
 
