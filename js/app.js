@@ -69,6 +69,7 @@ function displayStoreInfo(store) {
     return [newDiv, newHeading, newUl, storeName];
   }
 
+  // console.log(appendShopName(storeName));
   appendShopName(storeName);
 
   function createHourlyData(divId) {
@@ -98,7 +99,6 @@ function displayStoreInfo(store) {
   createHourlyData(divId);
 }
 
-// console.log(displayStoreInfo($1stAndPike));
 displayStoreInfo($1stAndPike);
 displayStoreInfo(seaTacAirport);
 displayStoreInfo(seattleCenter);
