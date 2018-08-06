@@ -1,0 +1,38 @@
+h1 {
+  color: purple;
+  font: italic small-caps bold 70px Arial, Helvetica sans-serif;
+  text-align: center;
+  margin: 0 auto;
+}
+
+h2 {
+
+}
+
+/* font: font-style font-variant font-weight font-size/line-height font-family; */
+
+body {
+  background-color: hsla(26, 100%, 50%, 0.42);
+}
+
+body::after {
+  background: url("../images/salmon.png");
+  opacity: 0.5;
+  /* background-repeat: no-repeat;
+  background-position: bottom -250px right 320px;
+  background-attachment: absolute;
+  /* background-position: 0 auto; */
+}
+
+ul {
+  list-style-type: disc;
+  list-style-position: outside;
+  margin-left: 50px;
+  font-family: sans-serif;
+}
+
+/*
+Google font for highlights
+sans-serif web font for data (arial, verdana, helvetica)
+serif web font (georgia, times, etc.) for text
+*/
