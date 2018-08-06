@@ -77,7 +77,7 @@ function displayStoreInfo(store) {
 
     // Opening hour starts at 6 and ends after 15 hours
     for (let j = 6; j < 21; j++) {
-      // Start by creating new <li> and append to each store's unique div
+      // Start by creating new <li> and append to each store's unique ul
       let liElement = document.createElement('li');
       document.getElementById(`${divId}-ul`).append(liElement);
 
