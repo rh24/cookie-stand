@@ -1,5 +1,7 @@
 h1 {
   color: purple;
+  font: italic bold 70px Serif;
+  text-align: center;
 }
 
 body {
