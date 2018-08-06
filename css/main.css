@@ -11,5 +11,12 @@ body {
   background-image: url("../images/salmon.png");
   background-repeat: no-repeat;
   background-position: bottom -250px right 320px;
+  /* background-position: 0 auto; */
   background-color: hsla(26, 100%, 50%, 0.42);
 }
+
+/*
+Google font for highlights
+sans-serif web font for data (arial, verdana, helvetica)
+serif web font (georgia, times, etc.)
+*/
