@@ -19,7 +19,7 @@ const seaTacAirport = {
 };
 
 const seattleCenter = {
-  name: 'SeattleCenter',
+  name: 'Seattle Center',
   minCustomers: 11,
   maxCustomers: 38,
   avgCookies: 3.7,
@@ -51,20 +51,57 @@ function generateRandomCustomers() {
 
 function displayStoreInfo(store) {
   let storeName = store.name;
+  let newDiv = document.createElement('div');
+  let divId = storeName.replace(/\s+/g, '-').toLowerCase();
+  newDiv.id = divId;
+  let newUl = document.createElement('ul');
 
-  function createLists(storeName) {
-    let newDiv = document.createElement('div');
+  // Append a new div and the store name to the DOM
+  function appendShopName(storeName) {
     let newHeading = document.createElement('h2');
     newHeading.innerText = `${storeName}`;
-    let newUl = document.createElement('ul');
+    document.body.appendChild(newDiv);
+    newDiv.appendChild(newHeading);
+    let storeUl = newDiv.appendChild(newUl);
+    storeUl.id = divId;
 
-    document.body.appendChild(newDiv.appendChild(newHeading, newUl));
-    return [newDiv, newHeading, newUl, storeName];
+    // Return the newly created HTML elements to test correct values
+    // return [newDiv, newHeading, newUl, storeName];
+    // createHourlyData();
   }
 
-  return createLists(storeName);
+  appendShopName(storeName);
+
+  function createHourlyData(divId) {
+    // Variable to reset 13:00 to 1pm
+    let newHour = 1;
+
+    // Opening hour starts at 6 and ends after 15 hours
+    for (let j = 6; j < 21; j++) {
+      // Start by creating new <li> and append to each store's unique div
+      let liElement = document.createElement('li');
+      document.getElementById(`${divId}`).append(liElement);
+
+      // Change <li> element inner HTML based on time of day
+      if (j < 12) {
+        liElement.innerHTML = `${j}am: ${Math.ceil(store.generateCustomers() * store.avgCookies)} cookies`;
+      } else if (j === 12) {
+        liElement.innerHTML = `${j}pm: ${Math.ceil(store.generateCustomers() * store.avgCookies)} cookies`;
+      } else {
+        // When time of day is 13 hours, reset to 1pm
+        liElement.innerHTML = `${newHour}pm: ${Math.ceil(store.generateCustomers() * store.avgCookies)} cookies`;
+        newHour++;
+      }
+    }
+  }
+
+  createHourlyData(divId);
 }
 
-console.log(displayStoreInfo($1stAndPike));
+// console.log(displayStoreInfo($1stAndPike));
 displayStoreInfo($1stAndPike);
-
+displayStoreInfo(seaTacAirport);
+displayStoreInfo(seattleCenter);
+displayStoreInfo(capitolHill);
+displayStoreInfo(alki);
+// createHourlyData();
