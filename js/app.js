@@ -63,11 +63,10 @@ function displayStoreInfo(store) {
     document.body.appendChild(newDiv);
     newDiv.appendChild(newHeading);
     let storeUl = newDiv.appendChild(newUl);
-    storeUl.id = divId;
+    storeUl.id = `${divId}-ul`;
 
     // Return the newly created HTML elements to test correct values
-    // return [newDiv, newHeading, newUl, storeName];
-    // createHourlyData();
+    return [newDiv, newHeading, newUl, storeName];
   }
 
   appendShopName(storeName);
@@ -80,7 +79,7 @@ function displayStoreInfo(store) {
     for (let j = 6; j < 21; j++) {
       // Start by creating new <li> and append to each store's unique div
       let liElement = document.createElement('li');
-      document.getElementById(`${divId}`).append(liElement);
+      document.getElementById(`${divId}-ul`).append(liElement);
 
       // Change <li> element inner HTML based on time of day
       if (j < 12) {

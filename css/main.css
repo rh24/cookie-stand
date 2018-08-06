@@ -8,12 +8,16 @@ h1 {
 /* font: font-style font-variant font-weight font-size/line-height font-family; */
 
 body {
-  background-image: url("../images/salmon.png");
-  background-repeat: no-repeat;
+  background-color: hsla(26, 100%, 50%, 0.42);
+}
+
+body::after {
+  background: url("../images/salmon.png");
+  opacity: 0.5;
+  /* background-repeat: no-repeat;
   background-position: bottom -250px right 320px;
   background-attachment: absolute;
   /* background-position: 0 auto; */
-  background-color: hsla(26, 100%, 50%, 0.42);
 }
 
 /*
