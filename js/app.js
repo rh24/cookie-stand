@@ -2,7 +2,7 @@
 
 console.log('the js is linked');
 
-const $1standPike = {
+const $$1stAndPike = {
   name: '1st and Pike',
   minCustomers: 23,
   maxCustomers: 65,
@@ -50,15 +50,21 @@ function generateRandomCustomers() {
 }
 
 function displayStoreInfo(store) {
-  let storeName = store.
+  let storeName = store.name;
+
   function createLists(storeName) {
     let newDiv = document.createElement('div');
     let newHeading = document.createElement('h2');
+    newHeading.innerText = `${storeName}`;
     let newUl = document.createElement('ul');
-  
-    newHeading.innerHTML(`${storeName}`);
+
+    document.body.appendChild(newDiv.appendChild(newHeading, newUl));
+    return [newDiv, newHeading, newUl, storeName];
   }
+
+  return createLists(storeName);
 }
 
-displayStoreInfo($1standPike)
+console.log(displayStoreInfo($$1stAndPike));
+displayStoreInfo($$1stAndPike);
 
