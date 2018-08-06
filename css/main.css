@@ -1,9 +1,15 @@
 h1 {
   color: purple;
-  font: italic bold 70px Serif;
+  font: italic small-caps bold 70px Arial, Helvetica sans-serif;
   text-align: center;
+  margin: 0 auto;
 }
+
+/* font: font-style font-variant font-weight font-size/line-height font-family; */
 
 body {
   background-image: url("../images/salmon.png");
+  background-repeat: no-repeat;
+  background-position: bottom -250px right 320px;
+  background-color: hsla(26, 100%, 50%, 0.42);
 }
