@@ -73,17 +73,21 @@ function makeTable(stores) {
   let cookies;
 
   for (let store of stores) {
-    let tR = createElem('tr', store.name);
+    let tR = createElem('tr');
+    let tH = createElem('th', store.name);
+    tR.append(tH);
     verticalHeader[0].append(tR);
     cookies = Math.ceil(store.generateCustomers() * store.avgCookies);
   }
 
+  // Add 'Location' label in table header
+  horizontalHeader.appendChild(createElem('th', 'Location'));
+
   for (let i = 6; i < 21; i++) {
     let tH = createElem('th');
     horizontalHeader.appendChild(tH);
-    // verticalHeader.append(rowTotals);
 
-    // Change <li> element inner HTML based on time of day
+    // Change <th> text content based on time of day
     if (i < 12) {
       tH.textContent = `${i}:00am`;
     } else if (i === 12) {
