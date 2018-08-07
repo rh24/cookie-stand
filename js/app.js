@@ -89,11 +89,11 @@ function displayStoreInfo(store) {
     // Variable to reset 13:00 to 1pm
     let newHour = 1;
     let total = 0;
-    // Create line item for total cookies once
+    // Create line item for total cookies
     let liTotal = document.createElement('li');
 
     // Opening hour starts at 6 and ends after 15 hours
-    for (let j = 6; j < 21; j++) {
+    for (let i = 6; i < 21; i++) {
       // Start by creating new <li> and append to each store's unique ul
       let liElement = document.createElement('li');
       document.getElementById(`${divId}-ul`).append(liElement);
@@ -101,10 +101,10 @@ function displayStoreInfo(store) {
       let cookies = Math.ceil(store.generateCustomers() * store.avgCookies);
 
       // Change <li> element inner HTML based on time of day
-      if (j < 12) {
-        liElement.innerHTML = `${j}am: ${cookies} cookies`;
-      } else if (j === 12) {
-        liElement.innerHTML = `${j}pm: ${cookies} cookies`;
+      if (i < 12) {
+        liElement.innerHTML = `${i}am: ${cookies} cookies`;
+      } else if (i === 12) {
+        liElement.innerHTML = `${i}pm: ${cookies} cookies`;
       } else {
         // When time of day is 13 hours, reset to 1pm
         liElement.innerHTML = `${newHour}pm: ${cookies} cookies`;
