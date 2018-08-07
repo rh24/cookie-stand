@@ -2,6 +2,7 @@
 
 console.log('the js is linked');
 
+// global variables
 const $1stAndPike = new Store('1st and Pike', 23, 65, 6.3);
 const seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2);
 const seattleCenter = new Store('Seattle Center', 11, 38, 3.7);
@@ -16,16 +17,7 @@ const stores = [
   alki
 ];
 
-function Store(name, minCustomers, maxCustomers, avgCookies) {
-  this.name = name;
-  this.minCustomers = minCustomers;
-  this.maxCustomers = maxCustomers;
-  this.avgCookies = avgCookies;
-}
-
-Store.prototype.generateCustomers = generateRandomCustomers;
-Store.prototype.displayInfo = displayStoreInfo;
-
+// set up instance methods to attach to constructor
 function generateRandomCustomers() {
   let min = Math.ceil(this.minCustomers);
   let max = Math.floor(this.maxCustomers);
@@ -98,6 +90,19 @@ function displayStoreInfo(store) {
   createHourlyData(divId);
 }
 
+// set up a constructor
+function Store(name, minCustomers, maxCustomers, avgCookies) {
+  this.name = name;
+  this.minCustomers = minCustomers;
+  this.maxCustomers = maxCustomers;
+  this.avgCookies = avgCookies;
+}
+
+// attach instance methods
+Store.prototype.generateCustomers = generateRandomCustomers;
+Store.prototype.displayInfo = displayStoreInfo;
+
+// runner code
 function generateStores(stores) {
   stores.forEach(store => store.displayInfo(store));
 }
