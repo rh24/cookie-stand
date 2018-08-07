@@ -2,6 +2,20 @@
 
 console.log('the js is linked');
 
+const $1stAndPike = new Store('1st and Pike', 23, 65, 6.3);
+const seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2);
+const seattleCenter = new Store('Seattle Center', 11, 38, 3.7);
+const capitolHill = new Store('Capitol Hill', 20, 38, 2.3);
+const alki = new Store('Alki', 2, 16, 4.6);
+
+const stores = [
+  $1stAndPike,
+  seaTacAirport,
+  seattleCenter,
+  capitolHill,
+  alki
+];
+
 function Store(name, minCustomers, maxCustomers, avgCookies) {
   this.name = name;
   this.minCustomers = minCustomers;
@@ -83,21 +97,6 @@ function displayStoreInfo(store) {
 
   createHourlyData(divId);
 }
-
-const $1stAndPike = new Store('1st and Pike', 23, 65, 6.3);
-const seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2);
-const seattleCenter = new Store('Seattle Center', 11, 38, 3.7);
-const capitolHill = new Store('Capitol Hill', 20, 38, 2.3);
-const alki = new Store('Alki', 2, 16, 4.6);
-// debugger;
-
-const stores = [
-  $1stAndPike,
-  seaTacAirport,
-  seattleCenter,
-  capitolHill,
-  alki
-];
 
 function generateStores(stores) {
   stores.forEach(store => store.displayInfo(store));
