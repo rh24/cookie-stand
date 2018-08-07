@@ -116,7 +116,7 @@ function displayStoreInfo(store) {
 
     liTotal.innerHTML = `Total: ${total} cookies`;
     document.getElementById(`${divId}-ul`).append(liTotal);
-  }
+  } // End of createHourlyData function
 
   createHourlyData(divId);
 }
