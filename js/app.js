@@ -45,7 +45,7 @@ function Store(name, minCustomers, maxCustomers, avgCookies) {
 
 // attach instance methods
 Store.prototype.generateCustomers = generateRandomCustomers;
-Store.prototype.displayInfo = displayStoreInfo;
+Store.prototype.render = render;
 
 // set up instance methods to attach to constructor
 function generateRandomCustomers() {
@@ -53,10 +53,6 @@ function generateRandomCustomers() {
   let max = Math.floor(this.maxCustomers);
 
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function displayStoreInfo(store) {
-  let storeName = store.name;
 }
 
 function createElem(elementType, textContent) {
@@ -70,14 +66,14 @@ function makeTable(stores) {
   let newHour = 1;
   let horizontalHeader = document.getElementsByClassName('hours')[0];
   let verticalHeader = document.getElementsByClassName('stores');
-  let cookies;
+  // let cookies;
 
   for (let store of stores) {
     let tR = createElem('tr');
+    tR.id = store.name.replace(/\s+/g, '-').toLowerCase();
     let tH = createElem('th', store.name);
     tR.append(tH);
     verticalHeader[0].append(tR);
-    cookies = Math.ceil(store.generateCustomers() * store.avgCookies);
   }
 
   // Add 'Location' label in table header
@@ -97,53 +93,26 @@ function makeTable(stores) {
       tH.textContent = `${newHour}:00pm`;
       newHour++;
     }
-
-    cookieTotals[`${i}`] += cookies;
   }
 }
 
-function createHourlyData() {
-  // Variable to reset 13:00 to 1pm
-  let createOnce = 1;
-  let newHour = 1;
-  // let total = 0;
-  // Create row for total cookies
+function render() {
+  let trId = this.name.replace(/\s+/g, '-').toLowerCase();
+  let tH = document.getElementById(trId);
+  let cookies;
 
-  let horizontalHeader = document.getElementsByClassName('hours')[0];
-  // debugger;
-
-  // Opening hour starts at 6 and ends after 15 hours
-  for (let i = 6; i < 21; i++) {
-    let tH = createElem('th');
-    horizontalHeader.appendChild(tH);
-    // debugger;
-    // verticalHeader.append(rowTotals);
-    let cookies = Math.ceil(store.generateCustomers() * store.avgCookies);
-
-    // Change <li> element inner HTML based on time of day
-    if (i < 12) {
-      tH.textContent = `${i}:00am`;
-    } else if (i === 12) {
-      tH.textContent = `${i}:00pm`;
-    } else {
-      // When time of day is 13 hours, reset to 1pm
-      tH.textContent = `${newHour}:00pm`;
-      newHour++;
-    }
-
-    cookieTotals[`${i}`] += cookies;
+  for (let clockHour in cookieTotals) {
+    cookies = Math.ceil(this.generateCustomers() * this.avgCookies);
+    tH.append(createElem('td', cookies));
+    cookieTotals[clockHour] += cookies;
   }
-
-  // rowTotals.innerHTML = total;
-  // document.getElementById(`${sectionId}`).append(rowTotals);
-} // End of createHourlyData function
-
-makeTable(stores);
-// createHourlyData();
+}
 
 // runner code
-// function generateStores(stores) {
-//   stores.forEach(store => store.displayInfo(store));
-// }
+makeTable(stores);
 
-// generateStores(stores);
+function inputData(stores) {
+  stores.forEach(store => store.render());
+}
+
+inputData(stores);
