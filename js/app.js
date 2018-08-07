@@ -2,58 +2,14 @@
 
 console.log('the js is linked');
 
-const $1stAndPike = {
-  name: '1st and Pike',
-  minCustomers: 23,
-  maxCustomers: 65,
-  avgCookies: 6.3,
-  generateCustomers: generateRandomCustomers,
-  displayInfo: displayStoreInfo,
-};
-
-const seaTacAirport = {
-  name: 'SeaTac Airport',
-  minCustomers: 3,
-  maxCustomers: 24,
-  avgCookies: 1.2,
-  generateCustomers: generateRandomCustomers,
-  displayInfo: displayStoreInfo,
-};
-
-const seattleCenter = {
-  name: 'Seattle Center',
-  minCustomers: 11,
-  maxCustomers: 38,
-  avgCookies: 3.7,
-  generateCustomers: generateRandomCustomers,
-  displayInfo: displayStoreInfo,
-};
-
-const capitolHill = {
-  name: 'Capitol Hill',
-  minCustomers: 20,
-  maxCustomers: 38,
-  avgCookies: 2.3,
-  generateCustomers: generateRandomCustomers,
-  displayInfo: displayStoreInfo,
-};
-
-const alki = {
-  name: 'Alki',
-  minCustomers: 2,
-  maxCustomers: 16,
-  avgCookies: 4.6,
-  generateCustomers: generateRandomCustomers,
-  displayInfo: displayStoreInfo,
-};
-
-const stores = [
-  $1stAndPike,
-  seaTacAirport,
-  seattleCenter,
-  capitolHill,
-  alki
-];
+function Store(name, minCustomers, maxCustomers, avgCookies, generateCustomers, displayInfo) {
+  this.name = name;
+  this.minCustomers = minCustomers;
+  this.maxCustomers = maxCustomers;
+  this.avgCookies = avgCookies;
+  this.generateCustomers = generateCustomers;
+  this.displayInfo = displayInfo;
+}
 
 function generateRandomCustomers() {
   let min = Math.ceil(this.minCustomers);
@@ -69,10 +25,16 @@ function displayStoreInfo(store) {
   newDiv.id = divId;
   let newUl = document.createElement('ul');
 
+  function createElem(elementType, textContent) {
+    let elem = document.createElement(elementType);
+    elem.textContent = textContent;
+
+    return elem;
+  }
+
   // Append a new div and the store name to the DOM
   function appendShopName(storeName) {
-    let newHeading = document.createElement('h2');
-    newHeading.innerText = `${storeName}`;
+    let newHeading = createElem('h2', storeName);
     document.body.appendChild(newDiv);
     newDiv.appendChild(newHeading);
     let storeUl = newDiv.appendChild(newUl);
@@ -120,6 +82,21 @@ function displayStoreInfo(store) {
 
   createHourlyData(divId);
 }
+
+const $1stAndPike = new Store('1st and Pike', 23, 65, 6.3, generateRandomCustomers, displayStoreInfo);
+const seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2, generateRandomCustomers, displayStoreInfo);
+const seattleCenter = new Store('Seattle Center', 11, 38, 3.7, generateRandomCustomers, displayStoreInfo);
+const capitolHill = new Store('Capitol Hill', 20, 38, 2.3, generateRandomCustomers, displayStoreInfo);
+const alki = new Store('Alki', 2, 16, 4.6, generateRandomCustomers, displayStoreInfo);
+// debugger;
+
+const stores = [
+  $1stAndPike,
+  seaTacAirport,
+  seattleCenter,
+  capitolHill,
+  alki
+];
 
 function generateStores(stores) {
   stores.forEach(store => store.displayInfo(store));
