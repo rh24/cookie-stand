@@ -8,6 +8,7 @@ const $1stAndPike = {
   maxCustomers: 65,
   avgCookies: 6.3,
   generateCustomers: generateRandomCustomers,
+  displayInfo: displayStoreInfo,
 };
 
 const seaTacAirport = {
@@ -16,6 +17,7 @@ const seaTacAirport = {
   maxCustomers: 24,
   avgCookies: 1.2,
   generateCustomers: generateRandomCustomers,
+  displayInfo: displayStoreInfo,
 };
 
 const seattleCenter = {
@@ -24,6 +26,7 @@ const seattleCenter = {
   maxCustomers: 38,
   avgCookies: 3.7,
   generateCustomers: generateRandomCustomers,
+  displayInfo: displayStoreInfo,
 };
 
 const capitolHill = {
@@ -32,6 +35,7 @@ const capitolHill = {
   maxCustomers: 38,
   avgCookies: 2.3,
   generateCustomers: generateRandomCustomers,
+  displayInfo: displayStoreInfo,
 };
 
 const alki = {
@@ -40,7 +44,16 @@ const alki = {
   maxCustomers: 16,
   avgCookies: 4.6,
   generateCustomers: generateRandomCustomers,
+  displayInfo: displayStoreInfo,
 };
+
+const stores = [
+  $1stAndPike,
+  seaTacAirport,
+  seattleCenter,
+  capitolHill,
+  alki
+];
 
 function generateRandomCustomers() {
   let min = Math.ceil(this.minCustomers);
@@ -106,9 +119,8 @@ function displayStoreInfo(store) {
   createHourlyData(divId);
 }
 
-displayStoreInfo($1stAndPike);
-displayStoreInfo(seaTacAirport);
-displayStoreInfo(seattleCenter);
-displayStoreInfo(capitolHill);
-displayStoreInfo(alki);
-// createHourlyData();
+function generateStores(stores) {
+  stores.forEach(store => store.displayInfo(store));
+}
+
+generateStores(stores);
