@@ -17,78 +17,23 @@ const stores = [
   alki
 ];
 
-// set up instance methods to attach to constructor
-function generateRandomCustomers() {
-  let min = Math.ceil(this.minCustomers);
-  let max = Math.floor(this.maxCustomers);
-
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function displayStoreInfo(store) {
-  let storeName = store.name;
-  let newTable = document.createElement('table');
-  document.getElementsByClassName('sales-tables')[0].appendChild(newTable);
-  let sectionId = storeName.replace(/\s+/g, '-').toLowerCase();
-  newTable.id = sectionId;
-
-  // let tHead = createElem('th');
-  // let tRow = createElem('tr');
-
-  function createElem(elementType, textContent) {
-    let elem = document.createElement(elementType);
-    elem.textContent = textContent;
-
-    return elem;
-  }
-
-  function createHourlyData(storeName, sectionId) {
-    // Variable to reset 13:00 to 1pm
-    let newHour = 1;
-    let total = 0;
-    let table = document.getElementById(`${sectionId}`);
-    let tHead = document.createElement('thead');
-    let tBody = document.createElement('tbody');
-    table.append(tHead);
-    table.append(tBody);
-    let tH = document.createElement('tr');
-    tHead.append(tH);
-    // Create line item for total cookies
-    let liTotal = document.createElement('tr');
-    let emptyCell = createElem('th');
-    tH.append(emptyCell);
-
-    tBody.append(document.createElement('th')); // adds space/empty cell above store names
-
-
-    // Opening hour starts at 6 and ends after 15 hours
-    for (let i = 6; i < 21; i++) {
-      // Start by creating new <li> and append to each store's unique ul
-      let timeHeader = createElem('th');
-      tH.append(timeHeader);
-      table.append(liTotal);
-      let cookies = Math.ceil(store.generateCustomers() * store.avgCookies);
-
-      // Change <li> element inner HTML based on time of day
-      if (i < 12) {
-        timeHeader.textContent = `${i}:00am`;
-      } else if (i === 12) {
-        timeHeader.textContent = `${i}:00pm`;
-      } else {
-        // When time of day is 13 hours, reset to 1pm
-        timeHeader.textContent = `${newHour}:00pm`;
-        newHour++;
-      }
-
-      total += cookies;
-    }
-
-    liTotal.innerHTML = `${total}`;
-    document.getElementById(`${sectionId}`).append(liTotal);
-  } // End of createHourlyData function
-
-  createHourlyData(storeName, sectionId);
-}
+const cookieTotals = {
+  6: 0,
+  7: 0,
+  8: 0,
+  9: 0,
+  10: 0,
+  11: 0,
+  12: 0,
+  13: 0,
+  14: 0,
+  15: 0,
+  16: 0,
+  17: 0,
+  18: 0,
+  19: 0,
+  20: 0,
+};
 
 // set up a constructor
 function Store(name, minCustomers, maxCustomers, avgCookies) {
@@ -102,9 +47,99 @@ function Store(name, minCustomers, maxCustomers, avgCookies) {
 Store.prototype.generateCustomers = generateRandomCustomers;
 Store.prototype.displayInfo = displayStoreInfo;
 
-// runner code
-function generateStores(stores) {
-  stores.forEach(store => store.displayInfo(store));
+// set up instance methods to attach to constructor
+function generateRandomCustomers() {
+  let min = Math.ceil(this.minCustomers);
+  let max = Math.floor(this.maxCustomers);
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-generateStores(stores);
+function displayStoreInfo(store) {
+  let storeName = store.name;
+}
+
+function createElem(elementType, textContent) {
+  let elem = document.createElement(elementType);
+  elem.textContent = textContent;
+
+  return elem;
+}
+
+function makeTable(stores) {
+  let newHour = 1;
+  let horizontalHeader = document.getElementsByClassName('hours')[0];
+  let verticalHeader = document.getElementsByClassName('stores');
+  let cookies;
+
+  for (let store of stores) {
+    let tR = createElem('tr', store.name);
+    verticalHeader[0].append(tR);
+    cookies = Math.ceil(store.generateCustomers() * store.avgCookies);
+  }
+
+  for (let i = 6; i < 21; i++) {
+    let tH = createElem('th');
+    horizontalHeader.appendChild(tH);
+    // verticalHeader.append(rowTotals);
+
+    // Change <li> element inner HTML based on time of day
+    if (i < 12) {
+      tH.textContent = `${i}:00am`;
+    } else if (i === 12) {
+      tH.textContent = `${i}:00pm`;
+    } else {
+      // When time of day is 13 hours, reset to 1pm
+      tH.textContent = `${newHour}:00pm`;
+      newHour++;
+    }
+
+    cookieTotals[`${i}`] += cookies;
+  }
+}
+
+function createHourlyData() {
+  // Variable to reset 13:00 to 1pm
+  let createOnce = 1;
+  let newHour = 1;
+  // let total = 0;
+  // Create row for total cookies
+
+  let horizontalHeader = document.getElementsByClassName('hours')[0];
+  // debugger;
+
+  // Opening hour starts at 6 and ends after 15 hours
+  for (let i = 6; i < 21; i++) {
+    let tH = createElem('th');
+    horizontalHeader.appendChild(tH);
+    // debugger;
+    // verticalHeader.append(rowTotals);
+    let cookies = Math.ceil(store.generateCustomers() * store.avgCookies);
+
+    // Change <li> element inner HTML based on time of day
+    if (i < 12) {
+      tH.textContent = `${i}:00am`;
+    } else if (i === 12) {
+      tH.textContent = `${i}:00pm`;
+    } else {
+      // When time of day is 13 hours, reset to 1pm
+      tH.textContent = `${newHour}:00pm`;
+      newHour++;
+    }
+
+    cookieTotals[`${i}`] += cookies;
+  }
+
+  // rowTotals.innerHTML = total;
+  // document.getElementById(`${sectionId}`).append(rowTotals);
+} // End of createHourlyData function
+
+makeTable(stores);
+// createHourlyData();
+
+// runner code
+// function generateStores(stores) {
+//   stores.forEach(store => store.displayInfo(store));
+// }
+
+// generateStores(stores);
