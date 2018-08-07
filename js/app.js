@@ -89,6 +89,7 @@ function displayStoreInfo(store) {
     // Variable to reset 13:00 to 1pm
     let newHour = 1;
     let total = 0;
+    // Create line item for total cookies once
     let liTotal = document.createElement('li');
 
     // Opening hour starts at 6 and ends after 15 hours
