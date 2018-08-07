@@ -113,6 +113,7 @@ function displayStoreInfo(store) {
 
       total += cookies;
     }
+
     liTotal.innerHTML = `Total: ${total} cookies`;
     document.getElementById(`${divId}-ul`).append(liTotal);
   }
