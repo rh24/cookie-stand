@@ -2,14 +2,15 @@
 
 console.log('the js is linked');
 
-function Store(name, minCustomers, maxCustomers, avgCookies, generateCustomers, displayInfo) {
+function Store(name, minCustomers, maxCustomers, avgCookies) {
   this.name = name;
   this.minCustomers = minCustomers;
   this.maxCustomers = maxCustomers;
   this.avgCookies = avgCookies;
-  this.generateCustomers = generateCustomers;
-  this.displayInfo = displayInfo;
 }
+
+Store.prototype.generateCustomers = generateRandomCustomers;
+Store.prototype.displayInfo = displayStoreInfo;
 
 function generateRandomCustomers() {
   let min = Math.ceil(this.minCustomers);
@@ -83,11 +84,11 @@ function displayStoreInfo(store) {
   createHourlyData(divId);
 }
 
-const $1stAndPike = new Store('1st and Pike', 23, 65, 6.3, generateRandomCustomers, displayStoreInfo);
-const seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2, generateRandomCustomers, displayStoreInfo);
-const seattleCenter = new Store('Seattle Center', 11, 38, 3.7, generateRandomCustomers, displayStoreInfo);
-const capitolHill = new Store('Capitol Hill', 20, 38, 2.3, generateRandomCustomers, displayStoreInfo);
-const alki = new Store('Alki', 2, 16, 4.6, generateRandomCustomers, displayStoreInfo);
+const $1stAndPike = new Store('1st and Pike', 23, 65, 6.3);
+const seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2);
+const seattleCenter = new Store('Seattle Center', 11, 38, 3.7);
+const capitolHill = new Store('Capitol Hill', 20, 38, 2.3);
+const alki = new Store('Alki', 2, 16, 4.6);
 // debugger;
 
 const stores = [
