@@ -51,29 +51,32 @@ function displayStoreInfo(store) {
     let tBody = document.createElement('tbody');
     table.append(tHead);
     table.append(tBody);
-    let tH = document.createElement('th');
+    let tH = document.createElement('tr');
     tHead.append(tH);
     // Create line item for total cookies
     let liTotal = document.createElement('tr');
-    let emptyCell = createElem('td');
+    let emptyCell = createElem('th');
     tH.append(emptyCell);
+
+    tBody.append(document.createElement('th')); // adds space/empty cell above store names
+
 
     // Opening hour starts at 6 and ends after 15 hours
     for (let i = 6; i < 21; i++) {
       // Start by creating new <li> and append to each store's unique ul
-      let tD = createElem('td');
-      tH.append(tD);
+      let timeHeader = createElem('th');
+      tH.append(timeHeader);
       table.append(liTotal);
       let cookies = Math.ceil(store.generateCustomers() * store.avgCookies);
 
       // Change <li> element inner HTML based on time of day
       if (i < 12) {
-        tD.textContent = `${i}:00am`;
+        timeHeader.textContent = `${i}:00am`;
       } else if (i === 12) {
-        tD.textContent = `${i}:00pm`;
+        timeHeader.textContent = `${i}:00pm`;
       } else {
         // When time of day is 13 hours, reset to 1pm
-        tD.textContent = `${newHour}:00pm`;
+        timeHeader.textContent = `${newHour}:00pm`;
         newHour++;
       }
 
