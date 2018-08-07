@@ -5,6 +5,10 @@ h1 {
   margin: 0 auto;
 }
 
+.h1 {
+  font-family: 'Montserrat', sans-serif;
+}
+
 /* h2 {
 
 } */
@@ -15,13 +19,19 @@ body {
   background-color: hsla(26, 100%, 50%, 0.42);
 }
 
-body::after {
+/* body::after {
   background: url("../images/salmon.png");
   opacity: 0.5;
   /* background-repeat: no-repeat;
   background-position: bottom -250px right 320px;
   background-attachment: absolute;
   /* background-position: 0 auto; */
+/* } */
+
+img {
+  position: fixed;
+  top: 100px;
+  right: 400px;
 }
 
 ul {

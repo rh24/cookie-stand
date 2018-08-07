@@ -2,15 +2,22 @@
 
 console.log('the js is linked');
 
-function Store(name, minCustomers, maxCustomers, avgCookies, generateCustomers, displayInfo) {
-  this.name = name;
-  this.minCustomers = minCustomers;
-  this.maxCustomers = maxCustomers;
-  this.avgCookies = avgCookies;
-  this.generateCustomers = generateCustomers;
-  this.displayInfo = displayInfo;
-}
+// global variables
+const $1stAndPike = new Store('1st and Pike', 23, 65, 6.3);
+const seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2);
+const seattleCenter = new Store('Seattle Center', 11, 38, 3.7);
+const capitolHill = new Store('Capitol Hill', 20, 38, 2.3);
+const alki = new Store('Alki', 2, 16, 4.6);
 
+const stores = [
+  $1stAndPike,
+  seaTacAirport,
+  seattleCenter,
+  capitolHill,
+  alki
+];
+
+// set up instance methods to attach to constructor
 function generateRandomCustomers() {
   let min = Math.ceil(this.minCustomers);
   let max = Math.floor(this.maxCustomers);
@@ -83,21 +90,19 @@ function displayStoreInfo(store) {
   createHourlyData(divId);
 }
 
-const $1stAndPike = new Store('1st and Pike', 23, 65, 6.3, generateRandomCustomers, displayStoreInfo);
-const seaTacAirport = new Store('SeaTac Airport', 3, 24, 1.2, generateRandomCustomers, displayStoreInfo);
-const seattleCenter = new Store('Seattle Center', 11, 38, 3.7, generateRandomCustomers, displayStoreInfo);
-const capitolHill = new Store('Capitol Hill', 20, 38, 2.3, generateRandomCustomers, displayStoreInfo);
-const alki = new Store('Alki', 2, 16, 4.6, generateRandomCustomers, displayStoreInfo);
-// debugger;
+// set up a constructor
+function Store(name, minCustomers, maxCustomers, avgCookies) {
+  this.name = name;
+  this.minCustomers = minCustomers;
+  this.maxCustomers = maxCustomers;
+  this.avgCookies = avgCookies;
+}
 
-const stores = [
-  $1stAndPike,
-  seaTacAirport,
-  seattleCenter,
-  capitolHill,
-  alki
-];
+// attach instance methods
+Store.prototype.generateCustomers = generateRandomCustomers;
+Store.prototype.displayInfo = displayStoreInfo;
 
+// runner code
 function generateStores(stores) {
   stores.forEach(store => store.displayInfo(store));
 }
