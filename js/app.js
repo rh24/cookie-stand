@@ -76,6 +76,15 @@ function addStoreInfo() {
 
   // calculate cookie data and populate table
   this.render();
+  updateTotals();
+}
+
+function updateTotals() {
+  // nodelist of totals by hour
+  let tds = document.querySelectorAll('#totals td');
+  console.log(tds);
+
+  tds.forEach(td => td.textContent = cookieTotals[td.id]);
 }
 
 // helper function
@@ -191,7 +200,7 @@ function submitForm(e) {
 // called once in runner code in order to create table elements to append on totals row
 function renderTotals() {
   for (let clockHour in cookieTotals) {
-    let sum = createEl('td', cookieTotals[clockHour]);
+    let sum = createEl('td', cookieTotals[clockHour], clockHour);
     document.getElementById('totals').append(sum);
   }
 }
