@@ -107,6 +107,31 @@ function makeTable(stores) {
   table[0].append(totals);
 }
 
+// attach event listeners to DOM elements
+function attachEventListeners() {
+  const addStoreButton = document.getElementsByTagName('button')[0];
+  const form = document.getElementById('store-form');
+
+  addStoreButton.addEventListener('click', makeForm);
+  form.addEventListener('submit', submitForm);
+
+}
+
+// make form function
+function makeForm() {
+  // append form, fieldset, inputs w id/name attributes type="number", submit onto page
+  const formsDiv = document.getElementById('forms');
+  debugger;
+
+  // formsDiv.append;
+}
+
+function submitForm() {
+  // on form submit, append data to document.querySelectorAll('tr th')[last].append
+  // create new Store object with (event.target.nameAttr.value)
+}
+
+
 // called once in runner code in order to create table elements to append on totals row
 function renderTotals() {
   for (let clockHour in cookieTotals) {
@@ -123,5 +148,6 @@ function inputData(stores) {
 }
 
 // runner code
+attachEventListeners();
 makeTable(stores);
 inputData(stores);
