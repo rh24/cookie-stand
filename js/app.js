@@ -54,14 +54,14 @@ function render() {
 
   for (let clockHour in cookieTotals) {
     cookies = Math.ceil(this.generateCustomers() * this.avgCookies);
-    let tD = createElem('td', cookies);
+    let tD = createEl('td', cookies);
     tH.append(tD);
     cookieTotals[clockHour] += cookies;
   }
 }
 
 // helper function
-function createElem(elementType, textContent) {
+function createEl(elementType, textContent) {
   let elem = document.createElement(elementType);
   elem.textContent = textContent;
 
@@ -75,19 +75,19 @@ function makeTable(stores) {
   let table = document.getElementsByTagName('tbody');
 
   for (let store of stores) {
-    let tR = createElem('tr');
+    let tR = createEl('tr');
     tR.id = store.name.replace(/\s+/g, '-').toLowerCase();
-    let tH = createElem('th', store.name);
+    let tH = createEl('th', store.name);
     tR.append(tH);
     table[0].append(tR);
   }
 
   // Add 'Location' label in table header
-  let location = createElem('th', 'Location');
+  let location = createEl('th', 'Location');
   horizontalHeader.appendChild(location);
 
   for (let i = 6; i < 21; i++) {
-    let tH = createElem('th');
+    let tH = createEl('th');
     horizontalHeader.appendChild(tH);
 
     // Change <th> text content based on time of day
@@ -102,7 +102,7 @@ function makeTable(stores) {
     }
   }
 
-  let totals = createElem('tr', 'Totals');
+  let totals = createEl('tr', 'Totals');
   totals.id = 'totals';
   table[0].append(totals);
 }
@@ -110,7 +110,7 @@ function makeTable(stores) {
 // called once in runner code in order to create table elements to append on totals row
 function renderTotals() {
   for (let clockHour in cookieTotals) {
-    let sum = createElem('td', cookieTotals[clockHour]);
+    let sum = createEl('td', cookieTotals[clockHour]);
     document.getElementById('totals').append(sum);
   }
 }
