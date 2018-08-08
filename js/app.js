@@ -158,12 +158,15 @@ function makeDivAndAppendInputField(inputType, inputName, labelText = null, labe
   return newDiv;
 }
 
+// form submit handler
 function submitForm(e) {
   e.preventDefault();
   console.log('hi');
+  const data = e.target;
   // on form submit, append data to document.querySelectorAll('tr th')[last].append
-  // create new Store object with (event.target.nameAttr.value)
 
+  // create new Store object with (event.target.nameAttr.value)
+  const store = new Store(data.name.value, data.minCustomers.value, data.maxCustomers.value, data.avgCookies.value);
 
   // fire inputData(stores) again and make sure [stores] is updated and the new Store object is in there!!
 }
