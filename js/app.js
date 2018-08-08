@@ -55,6 +55,7 @@ function generateRandomCustomers() {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// helper method
 function createElem(elementType, textContent) {
   let elem = document.createElement(elementType);
   elem.textContent = textContent;
@@ -62,6 +63,7 @@ function createElem(elementType, textContent) {
   return elem;
 }
 
+// makes table and labels for locations and hours
 function makeTable(stores) {
   let newHour = 1;
   let horizontalHeader = document.getElementsByClassName('hours')[0];
@@ -110,15 +112,12 @@ function render() {
     let tD = createElem('td', cookies);
     tH.append(tD);
     cookieTotals[clockHour] += cookies;
-    // sum.push(cookies);
-    // debugger;
   }
-  // debugger;
 }
 
 function renderTotals() {
+
   for (let clockHour in cookieTotals) {
-    // debugger;
     let sum = createElem('td', cookieTotals[clockHour]);
     document.getElementById('totals').append(sum);
   }
