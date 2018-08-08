@@ -108,14 +108,13 @@ function makeTable(stores) {
   table[0].append(totals);
 }
 
-// attach event listeners to DOM elements that already exist on pageload
+// attach event listener to DOM elements that already exist on pageload
 function attachAddStoreListener() {
   const addStoreButton = document.getElementsByTagName('button')[0];
   addStoreButton.addEventListener('click', makeForm);
 }
 
-// form is only rendered on page after hitting 'Add store' button.
-// attach event listeners after form is on page or else error results
+// only gets fired after form is appended to page
 function attachFormSubmitListener() {
   const formsDiv = document.getElementById('forms');
   formsDiv.querySelectorAll('form').forEach(form => form.addEventListener('submit', submitForm));
@@ -139,6 +138,9 @@ function makeForm() {
   fieldset.appendChild(maxCustInput);
   fieldset.appendChild(avgCookiesInput);
   fieldset.appendChild(submit);
+
+  // attach listener after form is appended onto page or else error results
+  // because there's no form to attach listener to yet
   attachFormSubmitListener();
 }
 
