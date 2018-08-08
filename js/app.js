@@ -61,9 +61,10 @@ function render() {
 }
 
 // helper function
-function createEl(elementType, textContent) {
+function createEl(elementType, textContent = null, id = null) {
   let elem = document.createElement(elementType);
   elem.textContent = textContent;
+  elem.id = id;
 
   return elem;
 }
@@ -107,26 +108,38 @@ function makeTable(stores) {
   table[0].append(totals);
 }
 
-// attach event listeners to DOM elements
-function attachEventListeners() {
+// attach event listeners to DOM elements that already exist on pageload
+function attachAddStoreListener() {
   const addStoreButton = document.getElementsByTagName('button')[0];
-  const form = document.getElementById('store-form');
-
   addStoreButton.addEventListener('click', makeForm);
-  // form.addEventListener('submit', submitForm);
+}
 
+// form is only rendered on page after hitting 'Add store' button.
+// attach event listeners after form is on page or else error results
+function attachFormSubmitListener() {
+  const formsDiv = document.getElementById('forms');
+  formsDiv.querySelectorAll('form').forEach(form => form.addEventListener('submit', submitForm));
 }
 
 // make form function
 function makeForm() {
   // append form, fieldset, inputs w id/name attributes type="number", submit onto page
   const formsDiv = document.getElementById('forms');
-  // debugger;
-  let form = formsDiv.appendChild(createEl('form'));
-  let fieldset = form.appendChild(createEl('fieldset'));
-  let divAndInput = makeDivAndAppendInputField('text', 'location', 'Enter location: ', 'location');
-  fieldset.appendChild(divAndInput);
-  // formsDiv.append;
+  const form = createEl('form', undefined, 'store-form');
+  formsDiv.appendChild(form);
+  const fieldset = form.appendChild(createEl('fieldset'));
+  const locInput = makeDivAndAppendInputField('text', 'name', 'Enter location: ', 'name');
+  const minCustInput = makeDivAndAppendInputField('number', 'minCustomers', 'Minimum customers: ');
+  const maxCustInput = makeDivAndAppendInputField('number', 'maxCustomers', 'Maximum customers: ');
+  const avgCookiesInput = makeDivAndAppendInputField('number', 'avgCookies', 'Avg. cookies sold per customer: ');
+  const submit = makeDivAndAppendInputField('submit', 'submit');
+
+  fieldset.appendChild(locInput);
+  fieldset.appendChild(minCustInput);
+  fieldset.appendChild(maxCustInput);
+  fieldset.appendChild(avgCookiesInput);
+  fieldset.appendChild(submit);
+  attachFormSubmitListener();
 }
 
 function makeDivAndAppendInputField(inputType, inputName, labelText = null, labelFor = inputName) {
@@ -143,9 +156,12 @@ function makeDivAndAppendInputField(inputType, inputName, labelText = null, labe
   return newDiv;
 }
 
-function submitForm() {
+function submitForm(e) {
+  e.preventDefault();
+  console.log('hi');
   // on form submit, append data to document.querySelectorAll('tr th')[last].append
   // create new Store object with (event.target.nameAttr.value)
+
 
   // fire inputData(stores) again and make sure [stores] is updated and the new Store object is in there!!
 }
@@ -167,6 +183,6 @@ function inputData(stores) {
 }
 
 // runner code
-attachEventListeners();
+attachAddStoreListener();
 makeTable(stores);
 inputData(stores);
