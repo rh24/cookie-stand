@@ -55,7 +55,7 @@ function generateRandomCustomers() {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// helper method
+// helper function
 function createElem(elementType, textContent) {
   let elem = document.createElement(elementType);
   elem.textContent = textContent;
