@@ -56,6 +56,8 @@ function render() {
   for (let clockHour in cookieTotals) {
     cookies = Math.ceil(this.generateCustomers() * this.avgCookies);
     let tD = createEl('td', cookies);
+    // don't think i need this below
+    // tD.class = this.name.replace(/\s+/g, '-').toLowerCase();
     tH.append(tD);
     cookieTotals[clockHour] += cookies;
   }
@@ -104,8 +106,8 @@ function makeTable(stores) {
 
   // future refactor: if store is new / can't find store tr.id on page, add new tr to table
   for (let store of stores) {
-    let tR = createEl('tr');
-    tR.id = store.name.replace(/\s+/g, '-').toLowerCase();
+    let tR = createEl('tr', undefined, store.name.replace(/\s+/g, '-').toLowerCase());
+    // tR.id = store.name.replace(/\s+/g, '-').toLowerCase();
     let tH = createEl('th', store.name);
     tR.append(tH);
     table[0].append(tR);
@@ -116,7 +118,7 @@ function makeTable(stores) {
   horizontalHeader.appendChild(location);
 
   for (let i = 6; i < 21; i++) {
-    let tH = createEl('th');
+    let tH = createEl('th', undefined, i);
     horizontalHeader.appendChild(tH);
 
     // Change <th> text content based on time of day
@@ -131,9 +133,28 @@ function makeTable(stores) {
     }
   }
 
-  let totals = createEl('tr', 'Totals');
-  totals.id = 'totals';
+  let totals = createEl('tr', 'Totals', 'totals');
   table[0].append(totals);
+  let dailyTotals = createEl('th', 'Daily Location Totals', 'daily-totals');
+  let lastHour = document.getElementById(20);
+  lastHour.insertAdjacentElement('afterend', dailyTotals);
+}
+
+function sumDailyTotals() {
+  let reduceSum = [];
+  let trs = document.querySelectorAll('tr');
+
+  // iterate over nodelist with relevant data from index 2 onwards
+  for (let i = 2; i < trs.length; i++ ) {
+    let tds = trs[i].querySelectorAll('td');
+    // iterate over nodelist with relevant data from index 1 onwards
+    for (let j = 1; j < tds.length; j++) {
+      reduceSum.push(parseInt(tds[j].innerText));
+    }
+
+    let dailyTotal = reduceSum.reduce((acc, currentVal) => acc + currentVal);
+    tds[tds.length-1].insertAdjacentElement('afterend', createEl('td', dailyTotal));
+  }
 }
 
 // attach event listener to DOM elements that already exist on pageload
@@ -166,7 +187,7 @@ function makeForm() {
     fieldset.appendChild(el);
   }
 
-  // attach listener after form is appended onto page or else error results because there's no form to attach listener to yet
+  // attach listener after form is appended onto page or else error results because there's no form doesn't exist
   attachFormSubmitListener();
 }
 
@@ -196,7 +217,6 @@ function submitForm(e) {
   store.addStore();
 }
 
-
 // called once in runner code in order to create table elements to append on totals row
 function renderTotals() {
   for (let clockHour in cookieTotals) {
@@ -210,6 +230,7 @@ function inputData(stores) {
   createCookieTotalsObj();
   stores.forEach(store => store.render());
   renderTotals();
+  sumDailyTotals();
 }
 
 // runner code
