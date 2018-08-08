@@ -151,15 +151,13 @@ function makeForm() {
   const maxCustInput = makeDivAndAppendInputField('number', 'maxCustomers', 'Maximum customers: ');
   const avgCookiesInput = makeDivAndAppendInputField('number', 'avgCookies', 'Avg. cookies sold per customer: ');
   const submit = makeDivAndAppendInputField('submit', 'submit');
+  const formElements = [locInput, minCustInput, maxCustInput, avgCookiesInput, submit];
 
-  fieldset.appendChild(locInput);
-  fieldset.appendChild(minCustInput);
-  fieldset.appendChild(maxCustInput);
-  fieldset.appendChild(avgCookiesInput);
-  fieldset.appendChild(submit);
+  for (let el of formElements) {
+    fieldset.appendChild(el);
+  }
 
-  // attach listener after form is appended onto page or else error results
-  // because there's no form to attach listener to yet
+  // attach listener after form is appended onto page or else error results because there's no form to attach listener to yet
   attachFormSubmitListener();
 }
 
@@ -180,16 +178,13 @@ function makeDivAndAppendInputField(inputType, inputName, labelText = null, labe
 // form submit handler
 function submitForm(e) {
   e.preventDefault();
-  // console.log('hi');
   const data = e.target;
-  // on form submit, append data to document.querySelectorAll('tr th')[last].append
-
   // create new Store object with (event.target.nameAttr.value)
   const store = new Store(data.name.value, parseInt(data.minCustomers.value), parseInt(data.maxCustomers.value), parseInt(data.avgCookies.value));
+
   // push new Store into global stores array
   stores.push(store);
   store.addStore();
-  // fire inputData(stores) again and make sure [stores] is updated and the new Store object is in there!!
 }
 
 
