@@ -113,7 +113,7 @@ function attachEventListeners() {
   const form = document.getElementById('store-form');
 
   addStoreButton.addEventListener('click', makeForm);
-  form.addEventListener('submit', submitForm);
+  // form.addEventListener('submit', submitForm);
 
 }
 
@@ -121,14 +121,33 @@ function attachEventListeners() {
 function makeForm() {
   // append form, fieldset, inputs w id/name attributes type="number", submit onto page
   const formsDiv = document.getElementById('forms');
-  debugger;
-
+  // debugger;
+  let form = formsDiv.appendChild(createEl('form'));
+  let fieldset = form.appendChild(createEl('fieldset'));
+  let divAndInput = makeDivAndAppendInputField('text', 'location', 'Enter location: ', 'location');
+  fieldset.appendChild(divAndInput);
   // formsDiv.append;
+}
+
+function makeDivAndAppendInputField(inputType, inputName, labelText = null, labelFor = inputName) {
+  let newDiv = createEl('div');
+  let label = createEl('label', labelText);
+  label.htmlFor = labelFor;
+  label.textContent = labelText;
+  newDiv.appendChild(label);
+  let input = newDiv.appendChild(createEl('input'));
+  input.type = inputType;
+  input.name = inputName;
+  input.id = inputName;
+
+  return newDiv;
 }
 
 function submitForm() {
   // on form submit, append data to document.querySelectorAll('tr th')[last].append
   // create new Store object with (event.target.nameAttr.value)
+
+  // fire inputData(stores) again and make sure [stores] is updated and the new Store object is in there!!
 }
 
 
