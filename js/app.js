@@ -38,6 +38,7 @@ function Store(name, minCustomers, maxCustomers, avgCookies) {
 // attach instance methods
 Store.prototype.generateCustomers = generateRandomCustomers;
 Store.prototype.render = render;
+Store.prototype.addStore = addStoreInfo;
 
 // set up instance methods to attach to constructor
 function generateRandomCustomers() {
@@ -60,6 +61,23 @@ function render() {
   }
 }
 
+function addStoreInfo() {
+  // last tr in HTML collection is Totals row. i want the last STORE th.
+  let htmlCollection = document.getElementsByTagName('tr');
+  let lastStoreTh = htmlCollection[htmlCollection.length-2];
+
+  // create new <tr><th>store name</th></tr>
+  let tR = createEl('tr', undefined, this.name.replace(/\s+/g, '-').toLowerCase());
+  let tH = createEl('th', this.name);
+
+  // append new store tr next to last store's tr
+  tR.append(tH);
+  lastStoreTh.insertAdjacentElement('afterend', tR);
+
+  // calculate cookie data and populate table
+  this.render();
+}
+
 // helper function
 function createEl(elementType, textContent = null, id = null) {
   let elem = document.createElement(elementType);
@@ -75,6 +93,7 @@ function makeTable(stores) {
   let horizontalHeader = document.getElementsByClassName('hours')[0];
   let table = document.getElementsByTagName('tbody');
 
+  // future refactor: if store is new / can't find store tr.id on page, add new tr to table
   for (let store of stores) {
     let tR = createEl('tr');
     tR.id = store.name.replace(/\s+/g, '-').toLowerCase();
@@ -161,13 +180,15 @@ function makeDivAndAppendInputField(inputType, inputName, labelText = null, labe
 // form submit handler
 function submitForm(e) {
   e.preventDefault();
-  console.log('hi');
+  // console.log('hi');
   const data = e.target;
   // on form submit, append data to document.querySelectorAll('tr th')[last].append
 
   // create new Store object with (event.target.nameAttr.value)
-  const store = new Store(data.name.value, data.minCustomers.value, data.maxCustomers.value, data.avgCookies.value);
-
+  const store = new Store(data.name.value, parseInt(data.minCustomers.value), parseInt(data.maxCustomers.value), parseInt(data.avgCookies.value));
+  // push new Store into global stores array
+  stores.push(store);
+  store.addStore();
   // fire inputData(stores) again and make sure [stores] is updated and the new Store object is in there!!
 }
 
