@@ -65,19 +65,19 @@ function createElem(elementType, textContent) {
 function makeTable(stores) {
   let newHour = 1;
   let horizontalHeader = document.getElementsByClassName('hours')[0];
-  let verticalHeader = document.getElementsByClassName('stores');
-  // let cookies;
+  let table = document.getElementsByTagName('tbody');
 
   for (let store of stores) {
     let tR = createElem('tr');
     tR.id = store.name.replace(/\s+/g, '-').toLowerCase();
     let tH = createElem('th', store.name);
     tR.append(tH);
-    verticalHeader[0].append(tR);
+    table[0].append(tR);
   }
 
   // Add 'Location' label in table header
-  horizontalHeader.appendChild(createElem('th', 'Location'));
+  let location = createElem('th', 'Location');
+  horizontalHeader.appendChild(location);
 
   for (let i = 6; i < 21; i++) {
     let tH = createElem('th');
@@ -94,6 +94,10 @@ function makeTable(stores) {
       newHour++;
     }
   }
+
+  let totals = createElem('tr', 'Totals');
+  totals.id = 'totals';
+  table[0].append(totals);
 }
 
 function render() {
@@ -103,8 +107,20 @@ function render() {
 
   for (let clockHour in cookieTotals) {
     cookies = Math.ceil(this.generateCustomers() * this.avgCookies);
-    tH.append(createElem('td', cookies));
+    let tD = createElem('td', cookies);
+    tH.append(tD);
     cookieTotals[clockHour] += cookies;
+    // sum.push(cookies);
+    // debugger;
+  }
+  // debugger;
+}
+
+function renderTotals() {
+  for (let clockHour in cookieTotals) {
+    // debugger;
+    let sum = createElem('td', cookieTotals[clockHour]);
+    document.getElementById('totals').append(sum);
   }
 }
 
@@ -113,6 +129,7 @@ makeTable(stores);
 
 function inputData(stores) {
   stores.forEach(store => store.render());
+  renderTotals();
 }
 
 inputData(stores);
