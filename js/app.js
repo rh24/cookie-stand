@@ -17,23 +17,15 @@ const stores = [
   alki
 ];
 
-const cookieTotals = {
-  6: 0,
-  7: 0,
-  8: 0,
-  9: 0,
-  10: 0,
-  11: 0,
-  12: 0,
-  13: 0,
-  14: 0,
-  15: 0,
-  16: 0,
-  17: 0,
-  18: 0,
-  19: 0,
-  20: 0,
-};
+// initiate object to store total cookies sold per hour
+const cookieTotals = new Object();
+
+// populate cookieTotals object with initial keys and values
+function createCookieTotalsObj() {
+  for (let i = 6; i < 21; i++) {
+    cookieTotals[i] = 0;
+  }
+}
 
 // set up a constructor
 function Store(name, minCustomers, maxCustomers, avgCookies) {
@@ -53,6 +45,19 @@ function generateRandomCustomers() {
   let max = Math.floor(this.maxCustomers);
 
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function render() {
+  let trId = this.name.replace(/\s+/g, '-').toLowerCase();
+  let tH = document.getElementById(trId);
+  let cookies;
+
+  for (let clockHour in cookieTotals) {
+    cookies = Math.ceil(this.generateCustomers() * this.avgCookies);
+    let tD = createElem('td', cookies);
+    tH.append(tD);
+    cookieTotals[clockHour] += cookies;
+  }
 }
 
 // helper function
@@ -102,33 +107,21 @@ function makeTable(stores) {
   table[0].append(totals);
 }
 
-function render() {
-  let trId = this.name.replace(/\s+/g, '-').toLowerCase();
-  let tH = document.getElementById(trId);
-  let cookies;
-
-  for (let clockHour in cookieTotals) {
-    cookies = Math.ceil(this.generateCustomers() * this.avgCookies);
-    let tD = createElem('td', cookies);
-    tH.append(tD);
-    cookieTotals[clockHour] += cookies;
-  }
-}
-
+// called once in runner code in order to create table elements to append on totals row
 function renderTotals() {
-
   for (let clockHour in cookieTotals) {
     let sum = createElem('td', cookieTotals[clockHour]);
     document.getElementById('totals').append(sum);
   }
 }
 
-// runner code
-makeTable(stores);
-
+// called once in runner code to fill table with data
 function inputData(stores) {
+  createCookieTotalsObj();
   stores.forEach(store => store.render());
   renderTotals();
 }
 
+// runner code
+makeTable(stores);
 inputData(stores);
