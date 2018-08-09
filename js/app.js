@@ -18,7 +18,7 @@ const stores = [
 ];
 
 // initiate object to store total cookies sold per hour
-const cookieTotals = new Object();
+const cookieTotals = {};
 
 // populate cookieTotals object with initial keys and values
 function createCookieTotalsObj() {
@@ -151,9 +151,11 @@ function sumDailyTotal(trId) {
 
 function sumTotals() {
   let allTotals = [];
+  let sumTotal;
   let totalsTd = document.querySelectorAll('#totals td');
+
   totalsTd.forEach(td => allTotals.push(parseInt(td.innerText)));
-  let sumTotal = allTotals.reduce((a, b) => a + b);
+  sumTotal = allTotals.reduce((a, b) => a + b);
   totalsTd[totalsTd.length-1].insertAdjacentElement('afterend', createEl('td', sumTotal));
 }
 
