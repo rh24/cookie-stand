@@ -58,7 +58,24 @@ function attachEventListeners() {
   // our locations
   // contact us
 
-  document.getElementById('who').addEventListener('click', appendImage('who'));
+  document.getElementById('who').addEventListener('click', (e) => {
+    e.preventDefault();
+    appendImage('who');
+  });
+  document.getElementById('source').addEventListener('click', (e) => {
+    e.preventDefault();
+    appendImage('source');
+  });
+  document.getElementById('cookies').addEventListener('click', (e) => {
+    e.preventDefault();
+    appendImage('cookies');
+  });
+  document.getElementById('merch').addEventListener('click', (e) => {
+    e.preventDefault();
+    appendImage('merch');
+  });
+  // document.getElementById('locations').addEventListener('click', appendImage('locations'));
+  // document.getElementById('contact').addEventListener('click', appendImage('contact'));
 }
 
 function createEl(elementType, textContent = null, id = null) {
@@ -72,13 +89,14 @@ function createEl(elementType, textContent = null, id = null) {
 function appendImage(id) {
   // debugger;
   let moreInfoDiv = document.getElementsByClassName('appendPic')[0];
-  let photo = createEl('img');
   // photo.class = 'appendPic';
+  let photo;
 
   for (let obj of pageData) {
     if (obj.id === id) {
-      // debugger;
       for (let img of obj.images) {
+        // debugger;
+        photo = createEl('img');
         photo.src = img;
         moreInfoDiv.appendChild(photo);
       }
