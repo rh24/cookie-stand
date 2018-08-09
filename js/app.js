@@ -56,8 +56,6 @@ function render() {
   for (let clockHour in cookieTotals) {
     cookies = Math.ceil(this.generateCustomers() * this.avgCookies);
     let tD = createEl('td', cookies);
-    // don't think i need this below
-    // tD.class = this.name.replace(/\s+/g, '-').toLowerCase();
     tH.append(tD);
     cookieTotals[clockHour] += cookies;
   }
