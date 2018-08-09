@@ -1,34 +1,51 @@
 h1 {
-  color: purple;
+  color: white;
   font: italic small-caps bold 70px Arial, Helvetica sans-serif;
+  text-shadow: 2px 2px #eb8383;
   text-align: center;
   margin: 0 auto;
+  background-color: rgba(112, 106, 76, 0.9);
+  box-shadow: 5px 10px;
+  clear: bottom;
+  padding: 3px 0px 10px 0px;
 }
 
 .h1 {
   font-family: 'Montserrat', sans-serif;
 }
 
+h3 {
+  font-family: 'Armata', sans-serif;
+  text-shadow: 2px 2px #eb8383;
+  font-size: 3em;
+  font-weight: bold;
+  color: white;
+  background-color: hsla(49, 21%, 53%, 0.9)	;
+  display: inline-block;
+  max-width: 700px;
+  max-height: 300px;
+  padding: 10px 50px 10px 50px;
+  margin-top: 10px;
+}
 
 /* font: font-style font-variant font-weight font-size/line-height font-family; */
 
 body {
-  background-color: hsla(26, 100%, 50%, 0.42);
+  background-color: hsla(26, 100%, 50%, 0.3);
 }
 
-/* body::after {
-  background: url("../images/salmon.png");
-  opacity: 0.5;
-  /* background-repeat: no-repeat;
-  background-position: bottom -250px right 320px;
-  background-attachment: absolute;
-  /* background-position: 0 auto; */
-/* } */
+.salmon img {
+  margin: 0 auto;
+  width: 50%;
+  height: auto;
+  padding: 50px;
+}
 
-img {
-  position: fixed;
-  top: 100px;
-  right: 400px;
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 ul {
@@ -36,6 +53,30 @@ ul {
   list-style-position: outside;
   margin-left: 50px;
   font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+}
+
+.menu {
+  background: hsla(49, 21%, 53%, 0.9)	;
+  text-align: center;
+  margin: 10px;
+  margin-bottom: 40px;
+  padding: 10px;
+}
+
+.menu span a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Armata', sans-serif;
+  text-shadow: 1px 1px #eb8383;
+}
+
+.menu span a:hover {
+  background-color: hsla(88, 38%, 34%, 0.2);
 }
 
 /*
@@ -57,4 +98,14 @@ tr:hover {
 div button {
   margin: 20 auto;
   padding: 5px;
+}
+
+.family {
+  text-align: center;
+  /* border: 1px solid hsla(49, 21%, 53%, 0.9)	; */
+}
+
+.family img {
+  border: 2.5px solid hsla(49, 21%, 53%, 0.9)	;
+  clear:both;
 }
