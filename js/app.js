@@ -158,10 +158,10 @@ function updateSumOfDailyTotals() {
   for (let i = 15; i < document.querySelectorAll('tr td').length; i += 16) {
     sumDailyTotals.push(Number(document.querySelectorAll('tr td')[i].innerText));
   }
-
+  // debugger;
   let sum = sumDailyTotals.slice(0, sumDailyTotals.length-1);
-  sum.reduce((a, b) => a + b);
-  document.querySelectorAll('tr td')[document.querySelectorAll('tr td').length-1].innerText = sum;
+  let summed = sum.reduce((a, b) => a + b);
+  document.querySelectorAll('tr td')[document.querySelectorAll('tr td').length-1].innerText = summed;
 }
 
 function sumTotals() {
