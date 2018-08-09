@@ -84,9 +84,9 @@ function addStoreInfo() {
 function updateTotals() {
   // nodelist of totals by hour
   let tds = document.querySelectorAll('#totals td');
-  console.log(tds);
-
   tds.forEach(td => td.textContent = cookieTotals[td.id]);
+
+  // add
 }
 
 // helper function
@@ -140,21 +140,38 @@ function makeTable(stores) {
   lastHour.insertAdjacentElement('afterend', dailyTotals);
 }
 
-function sumDailyTotals() {
-  let reduceSum = [];
-  let trs = document.querySelectorAll('tr');
-
-  // iterate over nodelist with relevant data from index 2 onwards
-  for (let i = 2; i < trs.length; i++ ) {
-    let tds = trs[i].querySelectorAll('td');
-    // iterate over nodelist with relevant data from index 1 onwards
-    for (let j = 1; j < tds.length; j++) {
-      reduceSum.push(parseInt(tds[j].innerText));
-    }
-
-    let dailyTotal = reduceSum.reduce((acc, currentVal) => acc + currentVal);
-    tds[tds.length-1].insertAdjacentElement('afterend', createEl('td', dailyTotal));
+function sumDailyTotal(trId) {
+  let storeTotal = [];
+  let tds;
+  if (trId === '1st-and-pike') {
+    tds = document.querySelectorAll('[id =\'1st-and-pike\'] td');
+  } else {
+    tds = document.querySelectorAll(`#${trId} td`);
   }
+
+  // iterate over nodelist with relevant data from index 1 onwards
+  for (let j = 1; j < tds.length; j++) {
+    storeTotal.push(parseInt(tds[j].innerText));
+  }
+
+  let dailyTotal = storeTotal.reduce((acc, currentVal) => acc + currentVal);
+  tds[tds.length-1].insertAdjacentElement('afterend', createEl('td', dailyTotal));
+
+  // regardless, always update daily totals for 'totals' tr
+  // totalsTd = document.querySelectorAll('#totals td');
+  // document.querySelectorAll('#totals td').forEach(td => allTotals.push(parseInt(td.innerText)));
+  // console.log(allTotals);
+  // allTotals.reduce((a, b) => a + b);
+  // totalsTd[totalsTd.length-1].insertAdjacentElement('afterend', createEl('td', sumTotal));
+
+}
+
+function sumTotals() {
+  let allTotals = [];
+  let totalsTd = document.querySelectorAll('#totals td');
+  totalsTd.forEach(td => allTotals.push(parseInt(td.innerText)));
+  let sumTotal = allTotals.reduce((a, b) => a + b);
+  totalsTd[totalsTd.length-1].insertAdjacentElement('afterend', createEl('td', sumTotal));
 }
 
 // attach event listener to DOM elements that already exist on pageload
@@ -228,9 +245,12 @@ function renderTotals() {
 // called once in runner code to fill table with data
 function inputData(stores) {
   createCookieTotalsObj();
-  stores.forEach(store => store.render());
+  stores.forEach(store => {
+    store.render();
+    sumDailyTotal(store.name.replace(/\s+/g, '-').toLowerCase());
+  });
   renderTotals();
-  sumDailyTotals();
+  sumTotals();
 }
 
 // runner code
