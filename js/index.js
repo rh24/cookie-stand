@@ -58,13 +58,36 @@ function attachEventListeners() {
   // our locations
   // contact us
 
-
+  document.getElementById('who').addEventListener('click', appendImage('who'));
 }
 
-function appendImageToArticle() {
+function createEl(elementType, textContent = null, id = null) {
+  let elem = document.createElement(elementType);
+  elem.textContent = textContent;
+  elem.id = id;
 
+  return elem;
+}
+
+function appendImage(id) {
+  // debugger;
+  let moreInfoDiv = document.getElementsByClassName('appendPic')[0];
+  let photo = createEl('img');
+  // photo.class = 'appendPic';
+
+  for (let obj of pageData) {
+    if (obj.id === id) {
+      // debugger;
+      for (let img of obj.images) {
+        photo.src = img;
+        moreInfoDiv.appendChild(photo);
+      }
+    }
+  }
 }
 
 function appendTextToParagraph() {
   let paragraph = document.getElementsByTagName('article')[0].getElementsByTagName('p')[0];
 }
+
+attachEventListeners();

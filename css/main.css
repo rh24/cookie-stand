@@ -100,12 +100,12 @@ div button {
   padding: 5px;
 }
 
-.family {
+.appendPic {
   text-align: center;
   /* border: 1px solid hsla(49, 21%, 53%, 0.9)	; */
 }
 
-.family img {
+.appendPic img {
   border: 2.5px solid hsla(49, 21%, 53%, 0.9)	;
   clear:both;
 }
