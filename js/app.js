@@ -81,6 +81,7 @@ function addStoreInfo() {
   this.render();
   sumDailyTotal(trId);
 }
+
 // helper function
 function createEl(elementType, textContent = null, id = null) {
   let elem = document.createElement(elementType);
