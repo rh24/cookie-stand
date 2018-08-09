@@ -78,6 +78,8 @@ function addStoreInfo() {
   // calculate cookie data and populate table
   this.render();
   sumDailyTotal(trId);
+  // updateSumTotals();
+  sumTotals();
 }
 
 // helper function
@@ -154,7 +156,13 @@ function sumTotals() {
   let totalsTd = document.querySelectorAll('#totals td');
   totalsTd.forEach(td => allTotals.push(parseInt(td.innerText)));
   let sumTotal = allTotals.reduce((a, b) => a + b);
-  totalsTd[totalsTd.length-1].insertAdjacentElement('afterend', createEl('td', sumTotal));
+
+  // replace total with new calculation if sumTotals cell already exists.
+  if (totalsTd.length !== 16) {
+    totalsTd[totalsTd.length-1].insertAdjacentElement('afterend', createEl('td', sumTotal));
+  } else {
+    totalsTd[totalsTd.length-1].textContent = sumTotal;
+  }
 }
 
 // attach event listener to DOM elements that already exist on pageload
