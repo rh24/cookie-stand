@@ -67,9 +67,10 @@ function addStoreInfo() {
   // last tr in HTML collection is Totals row. i want the last STORE th.
   let htmlCollection = document.getElementsByTagName('tr');
   let lastStoreTh = htmlCollection[htmlCollection.length-2];
+  let trId = this.name.replace(/\s+/g, '-').toLowerCase();
 
   // create new <tr><th>store name</th></tr>
-  let tR = createEl('tr', undefined, this.name.replace(/\s+/g, '-').toLowerCase());
+  let tR = createEl('tr', undefined, trId);
   let tH = createEl('th', this.name);
 
   // append new store tr next to last store's tr
@@ -78,17 +79,8 @@ function addStoreInfo() {
 
   // calculate cookie data and populate table
   this.render();
-  updateTotals();
+  sumDailyTotal(trId);
 }
-
-function updateTotals() {
-  // nodelist of totals by hour
-  let tds = document.querySelectorAll('#totals td');
-  tds.forEach(td => td.textContent = cookieTotals[td.id]);
-
-  // add
-}
-
 // helper function
 function createEl(elementType, textContent = null, id = null) {
   let elem = document.createElement(elementType);
@@ -156,14 +148,6 @@ function sumDailyTotal(trId) {
 
   let dailyTotal = storeTotal.reduce((acc, currentVal) => acc + currentVal);
   tds[tds.length-1].insertAdjacentElement('afterend', createEl('td', dailyTotal));
-
-  // regardless, always update daily totals for 'totals' tr
-  // totalsTd = document.querySelectorAll('#totals td');
-  // document.querySelectorAll('#totals td').forEach(td => allTotals.push(parseInt(td.innerText)));
-  // console.log(allTotals);
-  // allTotals.reduce((a, b) => a + b);
-  // totalsTd[totalsTd.length-1].insertAdjacentElement('afterend', createEl('td', sumTotal));
-
 }
 
 function sumTotals() {
