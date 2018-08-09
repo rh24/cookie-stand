@@ -4,7 +4,7 @@ h1 {
   text-shadow: 2px 2px #eb8383;
   text-align: center;
   margin: 0 auto;
-  background-color: purple;
+  background-color: rgba(112, 106, 76, 0.9);
   box-shadow: 5px 10px;
   clear: bottom;
   padding: 3px 0px 10px 0px;
@@ -20,11 +20,12 @@ h3 {
   font-size: 3em;
   font-weight: bold;
   color: white;
-  background-color: purple;
+  background-color: hsla(49, 21%, 53%, 0.9)	;
   display: inline-block;
   max-width: 700px;
   max-height: 300px;
   padding: 10px 50px 10px 50px;
+  margin-top: 10px;
 }
 
 /* font: font-style font-variant font-weight font-size/line-height font-family; */
@@ -54,6 +55,30 @@ ul {
   font-family: sans-serif;
 }
 
+.container {
+  display: flex;
+}
+
+.menu {
+  background: hsla(49, 21%, 53%, 0.9)	;
+  text-align: center;
+  margin: 10px;
+  margin-bottom: 40px;
+  padding: 10px;
+}
+
+.menu span a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Armata', sans-serif;
+  text-shadow: 1px 1px #eb8383;
+}
+
+.menu span a:hover {
+  background-color: hsla(88, 38%, 34%, 0.2);
+}
+
 /*
 Google font for highlights
 sans-serif web font for data (arial, verdana, helvetica)
@@ -77,10 +102,10 @@ div button {
 
 .family {
   text-align: center;
-  /* border: 1px solid purple; */
+  /* border: 1px solid hsla(49, 21%, 53%, 0.9)	; */
 }
 
 .family img {
-  border: 2.5px solid purple;
+  border: 2.5px solid hsla(49, 21%, 53%, 0.9)	;
   clear:both;
 }
