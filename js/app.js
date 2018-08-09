@@ -187,7 +187,7 @@ function makeForm() {
     fieldset.appendChild(el);
   }
 
-  // attach listener after form is appended onto page or else error results because there's no form doesn't exist
+  // attach listener after form is appended onto page or else error results because there's no form yet
   attachFormSubmitListener();
 }
 
