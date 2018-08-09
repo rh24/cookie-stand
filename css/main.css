@@ -4,7 +4,7 @@ h1 {
   text-shadow: 2px 2px #eb8383;
   text-align: center;
   margin: 0 auto;
-  background-color: rgba(112, 106, 76, 0.9);
+  background-color: rgba(133, 124, 78, 0.9);
   box-shadow: 5px 10px;
   clear: bottom;
   padding: 3px 0px 10px 0px;
@@ -76,7 +76,7 @@ ul {
 }
 
 .menu span a:hover {
-  background-color: hsla(88, 38%, 34%, 0.2);
+  background-color: hsla(48, 20%, 34%, 0.9);
 }
 
 /*
