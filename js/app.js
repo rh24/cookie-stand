@@ -80,7 +80,7 @@ function addStoreInfo() {
   let newDailyTotal = sumDailyTotal(trId);
   // updateSumTotals();
   sumTotals(newDailyTotal);
-  updateDailyTotalofTotals();
+  updateSumOfDailyTotals();
 }
 
 // helper function
@@ -143,8 +143,8 @@ function sumDailyTotal(trId) {
     tds = document.querySelectorAll(`#${trId} td`);
   }
 
-  // iterate over nodelist with relevant data from index 1 onwards
-  for (let j = 1; j < tds.length; j++) {
+  // iterate over nodelist with hourly data from 6am - 8pm
+  for (let j = 0; j < tds.length; j++) {
     storeTotal.push(parseInt(tds[j].innerText));
   }
 
@@ -152,7 +152,7 @@ function sumDailyTotal(trId) {
   tds[tds.length-1].insertAdjacentElement('afterend', createEl('td', dailyTotal));
 }
 
-function updateDailyTotalofTotals() {
+function updateSumOfDailyTotals() {
   let sumDailyTotals = [];
 
   for (let i = 15; i < document.querySelectorAll('tr td').length; i += 16) {
