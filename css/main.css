@@ -43,3 +43,14 @@ Google font for highlights
 sans-serif web font for data (arial, verdana, helvetica)
 serif web font (georgia, times, etc.) for text
 */
+
+table, th, td {
+  border: .5px solid gray;
+  margin: 0 auto;
+}
+
+div button {
+  margin: 20 auto;
+  padding: 5px;
+  display: block;
+}

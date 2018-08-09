@@ -38,6 +38,7 @@ function Store(name, minCustomers, maxCustomers, avgCookies) {
 // attach instance methods
 Store.prototype.generateCustomers = generateRandomCustomers;
 Store.prototype.render = render;
+Store.prototype.addStore = addStoreInfo;
 
 // set up instance methods to attach to constructor
 function generateRandomCustomers() {
@@ -55,15 +56,36 @@ function render() {
   for (let clockHour in cookieTotals) {
     cookies = Math.ceil(this.generateCustomers() * this.avgCookies);
     let tD = createEl('td', cookies);
+    // don't think i need this below
+    // tD.class = this.name.replace(/\s+/g, '-').toLowerCase();
     tH.append(tD);
     cookieTotals[clockHour] += cookies;
   }
 }
 
+function addStoreInfo() {
+  // last tr in HTML collection is Totals row. i want the last STORE th.
+  let htmlCollection = document.getElementsByTagName('tr');
+  let lastStoreTh = htmlCollection[htmlCollection.length-2];
+  let trId = this.name.replace(/\s+/g, '-').toLowerCase();
+
+  // create new <tr><th>store name</th></tr>
+  let tR = createEl('tr', undefined, trId);
+  let tH = createEl('th', this.name);
+
+  // append new store tr next to last store's tr
+  tR.append(tH);
+  lastStoreTh.insertAdjacentElement('afterend', tR);
+
+  // calculate cookie data and populate table
+  this.render();
+  sumDailyTotal(trId);
+}
 // helper function
-function createEl(elementType, textContent) {
+function createEl(elementType, textContent = null, id = null) {
   let elem = document.createElement(elementType);
   elem.textContent = textContent;
+  elem.id = id;
 
   return elem;
 }
@@ -74,9 +96,10 @@ function makeTable(stores) {
   let horizontalHeader = document.getElementsByClassName('hours')[0];
   let table = document.getElementsByTagName('tbody');
 
+  // future refactor: if store is new / can't find store tr.id on page, add new tr to table
   for (let store of stores) {
-    let tR = createEl('tr');
-    tR.id = store.name.replace(/\s+/g, '-').toLowerCase();
+    let tR = createEl('tr', undefined, store.name.replace(/\s+/g, '-').toLowerCase());
+    // tR.id = store.name.replace(/\s+/g, '-').toLowerCase();
     let tH = createEl('th', store.name);
     tR.append(tH);
     table[0].append(tR);
@@ -87,7 +110,7 @@ function makeTable(stores) {
   horizontalHeader.appendChild(location);
 
   for (let i = 6; i < 21; i++) {
-    let tH = createEl('th');
+    let tH = createEl('th', undefined, i);
     horizontalHeader.appendChild(tH);
 
     // Change <th> text content based on time of day
@@ -102,15 +125,103 @@ function makeTable(stores) {
     }
   }
 
-  let totals = createEl('tr', 'Totals');
-  totals.id = 'totals';
+  let totals = createEl('tr', 'Totals', 'totals');
   table[0].append(totals);
+  let dailyTotals = createEl('th', 'Daily Location Totals', 'daily-totals');
+  let lastHour = document.getElementById(20);
+  lastHour.insertAdjacentElement('afterend', dailyTotals);
+}
+
+function sumDailyTotal(trId) {
+  let storeTotal = [];
+  let tds;
+  if (trId === '1st-and-pike') {
+    tds = document.querySelectorAll('[id =\'1st-and-pike\'] td');
+  } else {
+    tds = document.querySelectorAll(`#${trId} td`);
+  }
+
+  // iterate over nodelist with relevant data from index 1 onwards
+  for (let j = 1; j < tds.length; j++) {
+    storeTotal.push(parseInt(tds[j].innerText));
+  }
+
+  let dailyTotal = storeTotal.reduce((acc, currentVal) => acc + currentVal);
+  tds[tds.length-1].insertAdjacentElement('afterend', createEl('td', dailyTotal));
+}
+
+function sumTotals() {
+  let allTotals = [];
+  let totalsTd = document.querySelectorAll('#totals td');
+  totalsTd.forEach(td => allTotals.push(parseInt(td.innerText)));
+  let sumTotal = allTotals.reduce((a, b) => a + b);
+  totalsTd[totalsTd.length-1].insertAdjacentElement('afterend', createEl('td', sumTotal));
+}
+
+// attach event listener to DOM elements that already exist on pageload
+function attachAddStoreListener() {
+  const addStoreButton = document.getElementsByTagName('button')[0];
+  addStoreButton.addEventListener('click', makeForm);
+}
+
+// only gets fired after form is appended to page
+function attachFormSubmitListener() {
+  const formsDiv = document.getElementById('forms');
+  formsDiv.querySelectorAll('form').forEach(form => form.addEventListener('submit', submitForm));
+}
+
+// make form function
+function makeForm() {
+  // append form, fieldset, inputs w id/name attributes type="number", submit onto page
+  const formsDiv = document.getElementById('forms');
+  const form = createEl('form', undefined, 'store-form');
+  formsDiv.appendChild(form);
+  const fieldset = form.appendChild(createEl('fieldset'));
+  const locInput = makeDivAndAppendInputField('text', 'name', 'Enter location: ', 'name');
+  const minCustInput = makeDivAndAppendInputField('number', 'minCustomers', 'Minimum customers: ');
+  const maxCustInput = makeDivAndAppendInputField('number', 'maxCustomers', 'Maximum customers: ');
+  const avgCookiesInput = makeDivAndAppendInputField('number', 'avgCookies', 'Avg. cookies sold per customer: ');
+  const submit = makeDivAndAppendInputField('submit', 'submit');
+  const formElements = [locInput, minCustInput, maxCustInput, avgCookiesInput, submit];
+
+  for (let el of formElements) {
+    fieldset.appendChild(el);
+  }
+
+  // attach listener after form is appended onto page or else error results because there's no form doesn't exist
+  attachFormSubmitListener();
+}
+
+function makeDivAndAppendInputField(inputType, inputName, labelText = null, labelFor = inputName) {
+  let newDiv = createEl('div');
+  let label = createEl('label', labelText);
+  label.htmlFor = labelFor;
+  label.textContent = labelText;
+  newDiv.appendChild(label);
+  let input = newDiv.appendChild(createEl('input'));
+  input.type = inputType;
+  input.name = inputName;
+  input.id = inputName;
+
+  return newDiv;
+}
+
+// form submit handler
+function submitForm(e) {
+  e.preventDefault();
+  const data = e.target;
+  // create new Store object with (event.target.nameAttr.value)
+  const store = new Store(data.name.value, parseInt(data.minCustomers.value), parseInt(data.maxCustomers.value), parseInt(data.avgCookies.value));
+
+  // push new Store into global stores array
+  stores.push(store);
+  store.addStore();
 }
 
 // called once in runner code in order to create table elements to append on totals row
 function renderTotals() {
   for (let clockHour in cookieTotals) {
-    let sum = createEl('td', cookieTotals[clockHour]);
+    let sum = createEl('td', cookieTotals[clockHour], clockHour);
     document.getElementById('totals').append(sum);
   }
 }
@@ -118,10 +229,15 @@ function renderTotals() {
 // called once in runner code to fill table with data
 function inputData(stores) {
   createCookieTotalsObj();
-  stores.forEach(store => store.render());
+  stores.forEach(store => {
+    store.render();
+    sumDailyTotal(store.name.replace(/\s+/g, '-').toLowerCase());
+  });
   renderTotals();
+  sumTotals();
 }
 
 // runner code
+attachAddStoreListener();
 makeTable(stores);
 inputData(stores);
