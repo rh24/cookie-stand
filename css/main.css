@@ -18,6 +18,9 @@ h2 {
   font-family: 'Armata', sans-serif;
   text-shadow: 2px 2px #eb8383;
   font-size: 3em;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 20px;
 }
 
 h3 {
@@ -32,6 +35,17 @@ h3 {
   max-height: 300px;
   padding: 10px 50px 10px 50px;
   margin-top: 10px;
+}
+
+p {
+  font-family: 'Armata', sans-serif;
+  font-size: 1em;
+}
+
+article {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-bottom: 130px;
 }
 
 /* font: font-style font-variant font-weight font-size/line-height font-family; */
