@@ -1,17 +1,31 @@
 h1 {
   color: white;
   font: italic small-caps bold 70px Arial, Helvetica sans-serif;
+  text-shadow: 2px 2px #eb8383;
   text-align: center;
   margin: 0 auto;
   background-color: purple;
   box-shadow: 5px 10px;
   clear: bottom;
+  padding: 3px 0px 10px 0px;
 }
 
 .h1 {
   font-family: 'Montserrat', sans-serif;
 }
 
+h3 {
+  font-family: 'Armata', sans-serif;
+  text-shadow: 2px 2px #eb8383;
+  font-size: 3em;
+  font-weight: bold;
+  color: white;
+  background-color: purple;
+  display: inline-block;
+  max-width: 700px;
+  max-height: 300px;
+  padding: 10px 50px 10px 50px;
+}
 
 /* font: font-style font-variant font-weight font-size/line-height font-family; */
 
