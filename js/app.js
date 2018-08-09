@@ -151,11 +151,9 @@ function sumDailyTotal(trId) {
 
 function sumTotals() {
   let allTotals = [];
-  let sumTotal;
   let totalsTd = document.querySelectorAll('#totals td');
-
   totalsTd.forEach(td => allTotals.push(parseInt(td.innerText)));
-  sumTotal = allTotals.reduce((a, b) => a + b);
+  let sumTotal = allTotals.reduce((a, b) => a + b);
   totalsTd[totalsTd.length-1].insertAdjacentElement('afterend', createEl('td', sumTotal));
 }
 
@@ -182,6 +180,7 @@ function makeForm() {
   const minCustInput = makeDivAndAppendInputField('number', 'minCustomers', 'Minimum customers: ');
   const maxCustInput = makeDivAndAppendInputField('number', 'maxCustomers', 'Maximum customers: ');
   const avgCookiesInput = makeDivAndAppendInputField('number', 'avgCookies', 'Avg. cookies sold per customer: ');
+  avgCookiesInput.getElementsByTagName('input')[0].step = 0.1;
   const submit = makeDivAndAppendInputField('submit', 'submit');
   const formElements = [locInput, minCustInput, maxCustInput, avgCookiesInput, submit];
 
