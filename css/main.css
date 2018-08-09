@@ -47,10 +47,14 @@ serif web font (georgia, times, etc.) for text
 table, th, td {
   border: .5px solid gray;
   margin: 0 auto;
+  text-align: center;
+}
+
+tr:hover {
+  background-color: #eee;
 }
 
 div button {
   margin: 20 auto;
   padding: 5px;
-  display: block;
 }
