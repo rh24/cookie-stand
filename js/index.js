@@ -86,25 +86,35 @@ function createEl(elementType, textContent = null, id = null) {
   return elem;
 }
 
-let appendCount = 1;
+function clearChildren() {
+  let nodes = document.querySelectorAll('.appendPic')[0];
+
+  while (nodes.firstChild) {
+    nodes.removeChild(nodes.firstChild);
+  }
+}
 
 function appendImage(id) {
-  while (appendCount === 1) {
-    let moreInfoDiv = document.getElementsByClassName('appendPic')[0];
-    let photo;
+  clearChildren();
+  let appPic = document.getElementsByClassName('appendPic')[0];
+  let photo;
 
-    for (let obj of pageData) {
-      if (obj.id === id) {
-        for (let img of obj.images) {
-          photo = createEl('img');
-          photo.src = img;
-          moreInfoDiv.appendChild(photo);
-        }
+  if (!appPic) {
+    appPic = createEl('div');
+    appPic.class = 'appendPic';
+    document.getElementsByClassName('more-info').appendChild(appPic);
+  }
+
+  for (let obj of pageData) {
+    if (obj.id === id) {
+      for (let img of obj.images) {
+        photo = createEl('img');
+        photo.src = img;
+        appPic.appendChild(photo);
       }
     }
-
-    appendCount++;
   }
+
 }
 
 function appendTextToParagraph() {
