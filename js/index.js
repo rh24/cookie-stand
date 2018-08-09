@@ -86,21 +86,24 @@ function createEl(elementType, textContent = null, id = null) {
   return elem;
 }
 
-function appendImage(id) {
-  // debugger;
-  let moreInfoDiv = document.getElementsByClassName('appendPic')[0];
-  // photo.class = 'appendPic';
-  let photo;
+let appendCount = 1;
 
-  for (let obj of pageData) {
-    if (obj.id === id) {
-      for (let img of obj.images) {
-        // debugger;
-        photo = createEl('img');
-        photo.src = img;
-        moreInfoDiv.appendChild(photo);
+function appendImage(id) {
+  while (appendCount === 1) {
+    let moreInfoDiv = document.getElementsByClassName('appendPic')[0];
+    let photo;
+
+    for (let obj of pageData) {
+      if (obj.id === id) {
+        for (let img of obj.images) {
+          photo = createEl('img');
+          photo.src = img;
+          moreInfoDiv.appendChild(photo);
+        }
       }
     }
+
+    appendCount++;
   }
 }
 
