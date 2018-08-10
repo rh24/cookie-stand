@@ -14,6 +14,15 @@ h1 {
   font-family: 'Montserrat', sans-serif;
 }
 
+h2 {
+  font-family: 'Armata', sans-serif;
+  text-shadow: 2px 2px #eb8383;
+  font-size: 3em;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
 h3 {
   font-family: 'Armata', sans-serif;
   text-shadow: 2px 2px #eb8383;
@@ -24,8 +33,19 @@ h3 {
   display: inline-block;
   max-width: 700px;
   max-height: 300px;
-  padding: 10px 50px 10px 50px;
+  padding: 15px 50px 10px 50px;
   margin-top: 10px;
+}
+
+p {
+  font-family: 'Armata', sans-serif;
+  font-size: 1.1em;
+}
+
+article {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-bottom: 130px;
 }
 
 /* font: font-style font-variant font-weight font-size/line-height font-family; */
@@ -100,12 +120,13 @@ div button {
   padding: 5px;
 }
 
-.family {
+.appendPic {
   text-align: center;
   /* border: 1px solid hsla(49, 21%, 53%, 0.9)	; */
 }
 
-.family img {
+.appendPic img {
   border: 2.5px solid hsla(49, 21%, 53%, 0.9)	;
   clear:both;
+  margin-right: 20px;
 }
