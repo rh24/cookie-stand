@@ -1,3 +1,5 @@
+// refactor to use object of objects
+
 const pageData = [
   {
     id: 'who',
@@ -61,6 +63,37 @@ const pageData = [
     ]
   },
 ];
+
+// also consider using store indeces
+const indexOfData = {
+  who: 0,
+  source: 1,
+  cookies: 2,
+  merch: 3,
+  contact: 4,
+  loc: 5
+};
+
+const objects = {
+  who: {
+
+  },
+  source: {
+
+  },
+  cookies: {
+
+  },
+  merch: {
+
+  },
+  contact: {
+
+  },
+  loc: {
+
+  }
+};
 
 function attachEventListeners() {
   // who we are
