@@ -6,7 +6,7 @@ const pageData = [
     ],
     header: '<h2>About Us</h2>',
     text: [
-      '<h2>About Us</h2> <p>Hi, we\'re the Smith family. We\'ve been making our salmon cookies for 89 years. It\'s been passed down for three generations, and we don\'t plan on stopping the production of these delightful morsels any time soon. Our customers are our treasure as is our secret recipe. <br /><br /> My wife, Caitlin, has been my partner in our business for fifteen years. My two children are our taste testers. They\'re also our biggest fans. <br /><br /> Come visit any of our locations to taste these treats for yourselves. They\'re seriously addictive!</p>'
+      '<h2>About Us</h2> <p>Hi, we\'re the Smith family. We\'ve been making our salmon cookies for 89 years. It\'s been passed down for three generations, and we don\'t plan on stopping the production of these delightful morsels any time soon. Our customers are our treasure as is our secret recipe. <br /><br /> My wife, Caitlin, has been my partner in our business for fifteen years. My two children are our taste testers. They\'re also our biggest fans. <br /><br /> Come visit any of our loc to taste these treats for yourselves. They\'re seriously addictive!</p>'
     ]
   },
   {
@@ -44,15 +44,22 @@ const pageData = [
     ]
   },
   {
-    id: 'locations',
-    // images: [
-    // ]
-    text: 'some filler text'
+    id: 'contact',
+    images: [
+
+    ],
+    text: [
+      '<h2>Reach out. We cater events!</h2><p>some filler text</p>'
+    ]
   },
   {
-    id: 'contact',
-    text: 'some filler text'
-  }
+    id: 'loc',
+    images: [
+    ],
+    text: [
+      '<h2>Where to Find Us</h2> <p>some filler text</p>'
+    ]
+  },
 ];
 
 function attachEventListeners() {
@@ -60,7 +67,7 @@ function attachEventListeners() {
   // our source
   // our cookies
   // merchandise
-  // our locations
+  // our loc
   // contact us
 
   document.getElementById('who').addEventListener('click', (e) => {
@@ -79,8 +86,14 @@ function attachEventListeners() {
     e.preventDefault();
     appendImage('merch');
   });
-  // document.getElementById('locations').addEventListener('click', appendImage('locations'));
-  // document.getElementById('contact').addEventListener('click', appendImage('contact'));
+  document.getElementById('loc').addEventListener('click', (e) => {
+    e.preventDefault();
+    appendImage('loc');
+  });
+  document.getElementById('contact').addEventListener('click', (e) => {
+    e.preventDefault();
+    appendImage('contact');
+  });
 }
 
 function createEl(elementType, textContent = null, id = null) {
@@ -111,7 +124,7 @@ function appendImage(id) {
   }
 
   for (let obj of pageData) {
-    if (obj.id === id) {
+    if (obj.id === id && obj.images.length > 0) {
       for (let img of obj.images) {
         photo = createEl('img');
         photo.src = img;
