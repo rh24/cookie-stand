@@ -171,12 +171,7 @@ function appendImage(id) {
 
 function appendTextToParagraph(id) {
   let paragraph = document.getElementsByTagName('article')[0].getElementsByTagName('p')[0];
-
-  for (let obj of pageData) {
-    if (obj.id === id) {
-      paragraph.innerHTML = obj.text[0];
-    }
-  }
+  paragraph.innerHTML = pageData[indexOfData[id]].text[0];
 }
 
 attachEventListeners();
