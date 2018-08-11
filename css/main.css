@@ -122,11 +122,27 @@ div button {
 
 .appendPic {
   text-align: center;
-  /* border: 1px solid hsla(49, 21%, 53%, 0.9)	; */
 }
 
 .appendPic img {
   border: 2.5px solid hsla(49, 21%, 53%, 0.9)	;
   clear:both;
   margin-right: 20px;
+}
+
+.locations {
+  border: 2.5px solid hsla(49, 21%, 53%, 0.9);
+  display: inline-block;
+  margin: 20px;
+  padding: 15px;
+  background-color: hsla(0, 0%, 100%, 0.418)
+}
+
+.contact {
+  border: 2px solid hsla(49, 21%, 53%, 0.9);
+  background-color: hsla(0, 0%, 100%, 0.418);
+  margin: 0 auto;
+  padding: 15px;
+  text-align: center;
+  max-width: 80%;
 }
