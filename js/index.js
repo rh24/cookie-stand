@@ -120,14 +120,38 @@ const objects = {
 
     ],
     text: [
-      '<h2>Reach out. We cater events!</h2><p>some filler text</p>'
+      `<h2>Reach out. We cater events!</h2>
+      <div class="contact">
+        <p>Phone number: +1(202)123-4567</p>
+        <p>Fax: +1(202)123-4589</p>
+      </div>`
     ]
   },
   loc: {
     images: [
     ],
     text: [
-      '<h2>Where to Find Us</h2> <p>some filler text</p>'
+      `<h2>Where to Find Us</h2>
+      <div class="locations">
+        <p>1st and Pike</p>
+        <p>Seattle, WA 98101</p>
+      </div>
+      <div class="locations">
+        <p>SeaTac Airport</p>
+        <p>Seattle, WA 98158</p>
+      </div>
+      <div class="locations">
+        <p>Seattle Center</p>
+        <p>Seattle, WA 98109</p>
+      </div>
+      <div class="locations">
+        <p>Capitol Hill</p>
+        <p>Seattle, WA 98122</p>
+      </div>
+      <div class="locations">
+        <p>Alki</p>
+        <p>Seattle, WA 98116</p>
+      </div>`
     ]
   }
 };
